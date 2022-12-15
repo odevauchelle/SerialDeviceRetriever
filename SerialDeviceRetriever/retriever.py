@@ -42,21 +42,6 @@ def list_devices( port_name = None ) :
     return devices
 
 
-def show_devices( port_name = None ) :
-    '''
-    show_devices( port_name = None )
-    '''
-
-    devices = list_devices( port_name = port_name )
-
-    for device in devices :
-
-        for key, value in device.items() :
-            print( key, ' = ', value )
-
-        print('\n')
-
-
 def find_devices( port_name = None, strict = False, **id ) :
     '''
     devices = find_devices( port_name = None, strict = False, **id )
@@ -90,9 +75,21 @@ def find_devices( port_name = None, strict = False, **id ) :
 
     return devices
 
+def show_devices( port_name = None, strict = False, **id ) :
+    '''
+    show_devices( port_name = None, strict = False, **id )
+    '''
+
+    devices = find_devices( port_name = port_name, strict = strict, **id )
+
+    for device in devices :
+
+        for key, value in device.items() :
+            print( key, ' = ', value )
+
+        print('\n')
 
 if __name__ == '__main__' :
 
-    show_devices()
-    print( find_devices( manufacturer = 'Arduino') )
+    show_devices( manufacturer = 'Arduino' )
     print( find_devices( serial_number = '85935333337351D04041', strict = True ) )
